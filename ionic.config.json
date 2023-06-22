@@ -1,0 +1,7 @@
+{
+  "name": "mobdev",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
