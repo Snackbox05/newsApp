@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Top 10 Headlines in Ireland Today
+      Top 10 Headlines in Ireland
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,9 +12,17 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
+<br><br>
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card *ngFor="let item of articles">
+      <ion-card-header>
+        <ion-card-title>{{item.headline}}</ion-card-title>
+        <ion-card-subtitle>{{item.date}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+   
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

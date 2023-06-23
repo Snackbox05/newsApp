@@ -20,21 +20,29 @@ interface NewsResponse {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+
 export class HomePage {
   headlines: any = []
+  articles: any=[]
   constructor(public httpClient:HttpClient) {
     this.loadData()
     this.parseHeadlines()
   }
 
+  
+
   loadData(){
       this.httpClient.get<NewsResponse>(`${API_URL}/top-headlines?country=ie&apiKey=${API_KEY}`).subscribe(results =>{
         
         this.headlines = results
+        
         console.log(this.headlines)
         for(let i = 0; i < 10; i++) {
           console.log("Headlines: " + this.headlines.articles[i].title)
+          this.articles.push({headline:this.headlines.articles[i].title, date:this.headlines.articles[i].publishedAt})
         }
+        console.log(this.articles)
     })
   }
 
