@@ -1,4 +1,19 @@
+import { environment } from 'src/environments/environment';
 import { Component } from '@angular/core';
+import { HttpClient } from "@angular/common/http"
+
+const API_URL = environment.API_URL;
+const API_KEY = environment.API_KEY;
+
+interface NewsResponse {
+  
+  articles:{
+    0:{
+      title: String;
+    }
+  }
+  
+}
 
 @Component({
   selector: 'app-home',
@@ -6,7 +21,26 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  headlines: any = []
+  constructor(public httpClient:HttpClient) {
+    this.loadData()
+    this.parseHeadlines()
+  }
 
-  constructor() {}
+  loadData(){
+      this.httpClient.get<NewsResponse>(`${API_URL}/top-headlines?country=ie&apiKey=${API_KEY}`).subscribe(results =>{
+        
+        this.headlines = results
+        console.log(this.headlines)
+        for(let i = 0; i < 10; i++) {
+          console.log("Headlines: " + this.headlines.articles[i].title)
+        }
+    })
+  }
 
+  parseHeadlines(){
+    
+  }
 }
+
+
